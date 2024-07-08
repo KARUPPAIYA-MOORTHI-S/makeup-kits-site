@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝙍𝙚𝙜𝙞𝙨𝙩𝙧𝙖𝙩𝙞𝙤𝙣 𝙁𝙤𝙧𝙢</title>
+    <style>
+        h2{
+            margin-top: 10%;
+            color: rgb(251, 25, 25);
+            
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url("https://images8.alphacoders.com/136/thumb-1920-1363789.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        #registerForm{
+            margin-top: 1%;
+            color: rgb(15, 15, 238);
+        }
+        form:hover{
+            background-color: rgb(44, 113, 166);
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 300px;
+        }
+        form input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>𝙍𝙚𝙜𝙞𝙨𝙩𝙧𝙖𝙩𝙞𝙤𝙣 𝙁𝙤𝙧𝙢</h2>
+    <form id="registerForm">
+        <input type="text" id="registerUsername" placeholder="Username" required>
+        <input type="password" id="registerPassword" placeholder="Password" required>
+       <a href="./register.html"> <button type="submit">𝙍𝙚𝙜𝙞𝙨𝙩𝙚𝙧</button></a>
+    </form>
+
+    <div id="message">already have account ? <a href="./login.html">𝙇𝙤𝙜𝙞𝙣</a></div>
+    <script>
+           // Function to handle registration
+           function registerUser(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('registerUsername').value;
+            var password = document.getElementById('registerPassword').value;
+
+            // Simulated database storage (using local storage)
+            var users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Check if username already exists
+            var existingUser = users.find(function(u) {
+                return u.username === username;
+            });
+
+            if (existingUser) {
+                showMessage('Registration failed. Username already exists.');
+                
+            } else {
+                // Add new user to the list
+                users.push({ username: username, password: password });
+                localStorage.setItem('users', JSON.stringify(users));
+                showMessage('Registration successful for ' + username + '. Please login.');
+                window.location.href="./login.html";
+            }
+        }
+
+        // Function to display messages with alert
+        function showMessage(message) {
+            // Clear any existing message
+            document.getElementById('message').innerHTML = '';
+
+            // Display the message in an alert dialog
+            alert(message);
+        }
+        document.getElementById('registerForm').addEventListener('submit', registerUser);
+    </script>
+</body>
+</html>
